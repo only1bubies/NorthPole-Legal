@@ -27,22 +27,8 @@ export default function Team() {
       name: "Benita Riagbayire", /* PLACEHOLDER */
       title: "Partner", /* PLACEHOLDER */
       specialism: "Data Privacy and Corporate Governance", /* PLACEHOLDER */
-      initials: "B. A. R"
+      initials: "B. A"
     },
-    {
-      id: "3",
-      name: "Alice Johnson", /* PLACEHOLDER */
-      title: "Senior Associate", /* PLACEHOLDER */
-      specialism: "Commercial Litigation", /* PLACEHOLDER */
-      initials: "AJ"
-    },
-    {
-      id: "4",
-      name: "Robert Brown", /* PLACEHOLDER */
-      title: "Associate", /* PLACEHOLDER */
-      specialism: "Technology & Data Protection", /* PLACEHOLDER */
-      initials: "RB"
-    }
   ];
 
   return (
@@ -62,7 +48,7 @@ export default function Team() {
 
       <section className="py-24 px-6 md:px-12 bg-background">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             {teamMembers.map((member, idx) => (
               <ScrollReveal key={member.id} delay={idx * 0.1}>
                 <div className="bg-white p-10 border border-muted/10 text-center hover:shadow-xl transition-shadow duration-300 h-full flex flex-col items-center">
