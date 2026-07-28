@@ -32,7 +32,7 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">
           <Compass className="w-6 h-6 text-secondary transition-transform duration-500 group-hover:rotate-45" />
-          <span className="font-serif text-2xl font-bold tracking-tight">NorthPole</span>
+          <span className="font-serif text-2xl font-bold tracking-tight">NorthPole Solicitors</span>
         </Link>
 
         {/* Desktop Nav */}
