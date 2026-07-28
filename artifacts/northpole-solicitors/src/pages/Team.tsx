@@ -20,7 +20,7 @@ export default function Team() {
       name: "Ebubechukwu Odo", /* PLACEHOLDER */
       title: "Partner", /* PLACEHOLDER */
       specialism: "Intellectual Property, Energy and Property Law Practice", /* PLACEHOLDER */
-      initials: "E. D-M. O"
+      initials: "EO"
     },
     {
       id: "2",
