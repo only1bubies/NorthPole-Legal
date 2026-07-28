@@ -17,17 +17,17 @@ export default function Team() {
   const teamMembers = [
     {
       id: "1",
-      name: "Jane Doe", /* PLACEHOLDER */
-      title: "Managing Partner", /* PLACEHOLDER */
-      specialism: "Corporate Structuring & Governance", /* PLACEHOLDER */
-      initials: "JD"
+      name: "Ebubechukwu Odo", /* PLACEHOLDER */
+      title: "Partner", /* PLACEHOLDER */
+      specialism: "Intellectual Property, Energy and Property Law Practice", /* PLACEHOLDER */
+      initials: "E. D-M. O"
     },
     {
       id: "2",
-      name: "John Smith", /* PLACEHOLDER */
+      name: "Benita Riagbayire", /* PLACEHOLDER */
       title: "Partner", /* PLACEHOLDER */
-      specialism: "Intellectual Property & Media", /* PLACEHOLDER */
-      initials: "JS"
+      specialism: "Data Privacy and Corporate Governance", /* PLACEHOLDER */
+      initials: "B. A. R"
     },
     {
       id: "3",
