@@ -175,27 +175,26 @@ export default function Home() {
             </ScrollReveal>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((_, idx) => (
+          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            {[
+              { initials: "EO", name: "Ebubechukwu Odo", title: "Partner", specialism: "Intellectual Property, Energy and Property Law Practice" },
+              { initials: "BA", name: "Benita Riagbayire", title: "Partner", specialism: "Data Privacy and Corporate Governance" },
+            ].map((member, idx) => (
               <ScrollReveal key={idx} delay={idx * 0.1}>
                 <div className="bg-white p-8 border border-muted/10 text-center hover:shadow-lg transition-shadow duration-300">
-                  <div className="w-32 h-32 mx-auto rounded-full bg-muted/10 border-2 border-secondary flex items-center justify-center mb-6">
-                    <span className="font-serif text-3xl text-primary font-bold">
-                      {/* PLACEHOLDER: Lawyer initials */}
-                      L{idx + 1}
+                  <div className="w-32 h-32 mx-auto rounded-full bg-primary border-2 border-secondary flex items-center justify-center mb-6">
+                    <span className="font-serif text-3xl text-white font-bold">
+                      {member.initials}
                     </span>
                   </div>
                   <h3 className="font-serif text-2xl text-primary font-bold mb-2">
-                    {/* PLACEHOLDER: Lawyer name */}
-                    Lawyer Name
+                    {member.name}
                   </h3>
                   <p className="text-secondary font-medium tracking-[0.1em] uppercase text-sm mb-4">
-                    {/* PLACEHOLDER: Title */}
-                    Senior Partner
+                    {member.title}
                   </p>
                   <p className="text-foreground/70 text-sm">
-                    {/* PLACEHOLDER: Specialism */}
-                    Corporate & Commercial
+                    {member.specialism}
                   </p>
                 </div>
               </ScrollReveal>
