@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin "@tailwindcss/typography";
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --font-sans: var(--app-font-sans);
+  --font-serif: var(--app-font-serif);
+}
+
+:root {
+  /* Off-white #f7f4ef -> HSL: 41 29% 95% */
+  --background: 41 29% 95%;
+  /* Dark text #1c1c1c -> HSL: 0 0% 11% */
+  --foreground: 0 0% 11%;
+  
+  /* Gold #c9a84c -> HSL: 44 55% 54% */
+  --border: 44 55% 54%;
+  --input: 44 55% 54%;
+  --ring: 44 55% 54%;
+  
+  --card: 41 29% 95%;
+  --card-foreground: 0 0% 11%;
+  --card-border: 44 55% 54%;
+
+  /* Navy #1a2e4a -> HSL: 215 48% 20% */
+  --primary: 215 48% 20%;
+  /* Off-white */
+  --primary-foreground: 41 29% 95%;
+
+  /* Gold #c9a84c -> HSL: 44 55% 54% */
+  --secondary: 44 55% 54%;
+  /* Navy */
+  --secondary-foreground: 215 48% 20%;
+
+  /* Muted #6b7280 -> HSL: 218 11% 46% */
+  --muted: 218 11% 46%;
+  --muted-foreground: 41 29% 95%;
+
+  --app-font-sans: 'Inter', sans-serif;
+  --app-font-serif: 'Playfair Display', serif;
+}
+
+@layer base {
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    line-height: 1.7;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif text-primary;
+  }
+}
