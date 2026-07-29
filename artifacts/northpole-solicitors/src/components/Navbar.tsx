@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'wouter';
-import { Compass, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export function Navbar() {
@@ -31,8 +31,7 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 h-24 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">
-          <Compass className="w-6 h-6 text-secondary transition-transform duration-500 group-hover:rotate-45" />
-          <span className="font-serif text-2xl font-bold tracking-tight">NorthPole Solicitors</span>
+          <img src="/logo.png" alt="NorthPole Solicitors" className="h-20 w-auto" />
         </Link>
 
         {/* Desktop Nav */}

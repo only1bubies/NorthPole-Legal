@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import { Compass, Linkedin, Twitter, Instagram } from 'lucide-react';
+import { Linkedin, Twitter, Instagram } from 'lucide-react';
 
 export function Footer() {
   const links = [
@@ -18,8 +18,7 @@ export function Footer() {
         {/* Column 1 */}
         <div>
           <Link href="/" className="flex items-center gap-2 mb-4 group outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm w-fit">
-            <Compass className="w-6 h-6 text-secondary" />
-            <span className="font-serif text-2xl font-bold tracking-tight">NorthPole</span>
+            <img src="/logo.png" alt="NorthPole Solicitors" className="h-16 w-auto bg-white rounded-sm p-1" />
           </Link>
           <p className="font-serif italic text-secondary text-lg">
             Legal Excellence.<br/>Trusted Guidance.
