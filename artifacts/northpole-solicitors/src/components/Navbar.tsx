@@ -30,8 +30,12 @@ export function Navbar() {
     <header className={`fixed top-0 w-full z-50 transition-colors duration-300 ${navBg} ${isTransparent ? 'text-white' : 'text-primary-foreground'}`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 h-24 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">
-          <img src="/logo.png" alt="NorthPole Solicitors" className="h-20 w-auto" />
+        <Link href="/" className="flex items-center gap-3 group outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">
+          <img src="/logo.png" alt="" className="h-20 w-auto" />
+          <span className="font-serif text-secondary text-xl font-semibold tracking-wide leading-tight">
+            NorthPole<br />
+            <span className="text-sm font-normal tracking-[0.2em] uppercase">Solicitors</span>
+          </span>
         </Link>
 
         {/* Desktop Nav */}
