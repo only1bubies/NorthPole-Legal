@@ -5,56 +5,116 @@
  * Replace placeholder text with real firm content before publishing.
  */
 
+import { useEffect, useState } from 'react';
 import { Link } from 'wouter';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { useDocumentMeta } from '@/hooks/useDocumentMeta';
-import { Shield, Music, Briefcase, Lock, Scale, Hammer, ArrowRight } from 'lucide-react';
+import { ArrowRight, Briefcase, CreditCard, FileText, Globe2, Gavel, Home as HomeIcon, Lock, Scale, Shield, Users } from 'lucide-react';
+import { getLatestInsights, type InsightArticle } from '@/lib/sanity';
 
 export default function Home() {
-  useDocumentMeta("Home", "Specialist commercial law counsel for businesses and rights holders across Nigeria and beyond.");
+  useDocumentMeta("Home", "Full-service general practice law firm serving individuals, businesses and institutions with practical legal support.");
+
+  const [latestInsights, setLatestInsights] = useState<InsightArticle[]>([]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadInsights() {
+      const data = await getLatestInsights(3);
+
+      if (isMounted) {
+        setLatestInsights(data);
+      }
+    }
+
+    loadInsights();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative h-screen min-h-[600px] bg-primary flex items-center justify-center overflow-hidden px-6">
-        <div className="absolute inset-0 z-0">
-          {/* Pure CSS subtle diagonal texture / radial gradient overlay */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-foreground/5 via-primary to-primary pointer-events-none"></div>
-          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%)', backgroundSize: '10px 10px' }}></div>
-        </div>
-        
+      <section className="relative min-h-[85vh] bg-primary flex items-center justify-center overflow-hidden px-6">
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,hsl(var(--brand-navy))_0%,hsl(var(--brand-navy)/0.95)_55%,hsl(var(--brand-navy))_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,215,0,0.06),transparent_22%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.04),transparent_18%)] pointer-events-none" />
+        <div className="absolute inset-0" style={{ opacity: 0.07, backgroundImage: 'repeating-linear-gradient(45deg, rgba(255,255,255,0.08) 0px, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 40px)' }} />
+
         <div className="relative z-10 max-w-5xl mx-auto text-center mt-16">
           <ScrollReveal>
             <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tight leading-tight mb-6">
-              Legal Excellence, <br className="hidden md:block"/>
-              Trusted Guidance
+              Practical Legal Solutions.<br className="hidden md:block" />
+              Trusted Representation.
             </h1>
           </ScrollReveal>
-          
+
           <ScrollReveal delay={0.2}>
             <div className="w-24 h-1 bg-secondary mx-auto mb-8"></div>
           </ScrollReveal>
-          
+
           <ScrollReveal delay={0.3}>
             <p className="font-serif italic text-xl md:text-3xl text-secondary max-w-3xl mx-auto mb-12">
-              Specialist commercial law counsel for businesses and rights holders across Nigeria and beyond.
+              Providing comprehensive legal services to individuals, businesses and institutions with integrity, precision and a commitment to achieving practical results.
             </p>
           </ScrollReveal>
-          
+
           <ScrollReveal delay={0.5} className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Link 
-              href="/practice-areas"
+            <Link
+              href="/contact"
               className="w-full sm:w-auto bg-secondary text-primary px-8 py-4 text-sm font-semibold uppercase tracking-[0.1em] hover:bg-white transition-colors duration-300"
             >
-              Our Practice Areas
+              Schedule a Consultation
             </Link>
-            <Link 
-              href="/team"
-              className="w-full sm:w-auto border border-white text-white px-8 py-4 text-sm font-semibold uppercase tracking-[0.1em] hover:bg-white hover:text-primary transition-colors duration-300"
+            <Link
+              href="/practice-areas"
+              className="w-full sm:w-auto border border-white/20 text-white px-8 py-4 text-sm font-semibold uppercase tracking-[0.1em] hover:bg-white hover:text-primary transition-colors duration-300"
             >
-              Meet Our Team
+              Explore Our Practice Areas
             </Link>
           </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Why Clients Choose NorthPole Solicitors */}
+      <section className="py-20 px-6 md:px-12 bg-background">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-12">
+              <h2 className="font-serif text-4xl font-bold text-primary mb-4">
+                Why Clients Choose NorthPole Solicitors
+              </h2>
+              <p className="text-foreground/70 max-w-3xl mx-auto">
+                We offer broad legal support across multiple areas of law, helping clients move forward with confidence and clarity.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              {
+                title: "Comprehensive Expertise",
+                desc: "We provide legal services across a broad range of practice areas, delivering practical solutions tailored to the needs of individuals, businesses and institutions.",
+              },
+              {
+                title: "Client-Centred Approach",
+                desc: "Every matter receives careful attention, clear communication and strategic legal advice focused on the client’s objectives.",
+              },
+              {
+                title: "Integrity & Professionalism",
+                desc: "Our commitment to ethical practice, diligence and professional excellence guides every instruction we undertake.",
+              },
+            ].map((card, idx) => (
+              <ScrollReveal key={card.title} delay={idx * 0.1}>
+                <div className="rounded-3xl border border-primary/10 bg-white/5 p-8 shadow-sm">
+                  <h3 className="font-serif text-2xl text-primary font-semibold mb-4">{card.title}</h3>
+                  <p className="text-foreground/75 leading-relaxed">{card.desc}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -109,19 +169,22 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: Shield, title: "Intellectual Property", desc: "Comprehensive protection and enforcement of trademarks, patents, and copyright." },
-              { icon: Music, title: "Entertainment & Media", desc: "Strategic counsel for artists, producers, and media organizations." },
-              { icon: Briefcase, title: "Corporate & Commercial", desc: "Advising on governance, transactions, and corporate structuring." },
-              { icon: Lock, title: "Tech & Data Protection", desc: "Navigating regulatory compliance and data privacy requirements." },
-              { icon: Scale, title: "Dispute Resolution", desc: "Alternative dispute resolution and arbitration strategies." },
-              { icon: Hammer, title: "Litigation", desc: "Robust representation in complex commercial litigation." }
+              { icon: Briefcase, title: "Corporate & Commercial Law", desc: "Advising on governance, contracts, transactions and general business operations." },
+              { icon: Scale, title: "Litigation & Dispute Resolution", desc: "Resolving disputes through negotiation, mediation and courtroom advocacy." },
+              { icon: HomeIcon, title: "Property & Real Estate", desc: "Guiding property transactions, leasing and land use matters with care." },
+              { icon: Users, title: "Employment & Labour Law", desc: "Supporting employers and individuals on workplace rights, contracts and disputes." },
+              { icon: Shield, title: "Family Law", desc: "Assisting families with sensitive matters such as separation, support and guardianship." },
+              { icon: Lock, title: "Intellectual Property", desc: "Protecting creative works, brands and innovations with strategic advice." },
+              { icon: Gavel, title: "Criminal Defence", desc: "Providing practical representation for individuals facing criminal charges." },
+              { icon: FileText, title: "Probate & Estate Planning", desc: "Helping clients plan for succession and manage estate matters responsibly." },
+              { icon: CreditCard, title: "Banking & Finance", desc: "Advising on lending, regulatory compliance and financial agreements." },
+              { icon: Globe2, title: "Immigration Law", desc: "Helping individuals and organisations navigate migration and visa matters." },
             ].map((area, idx) => (
               <ScrollReveal key={idx} delay={idx * 0.1}>
                 <Link href="/practice-areas" className="block h-full outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2">
                   <div className="bg-primary p-8 h-full group hover:bg-primary/90 transition-colors duration-300 border border-transparent hover:border-secondary/30">
                     <area.icon className="w-10 h-10 text-secondary mb-6" />
                     <h3 className="font-serif text-2xl text-white mb-4">{area.title}</h3>
-                    {/* PLACEHOLDER: One-sentence description of services */}
                     <p className="text-white/70 mb-8">{area.desc}</p>
                     <span className="inline-flex items-center text-secondary text-sm font-semibold uppercase tracking-[0.1em] group-hover:translate-x-2 transition-transform duration-300">
                       Explore <ArrowRight className="w-4 h-4 ml-2" />
@@ -131,26 +194,16 @@ export default function Home() {
               </ScrollReveal>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Why Clients Choose Us */}
-      <section className="py-24 px-6 md:px-12 bg-primary text-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
-            {[
-              { title: "Commercial Acumen", desc: "We don't just know the law; we understand the business environment." },
-              { title: "Rigorous Analysis", desc: "Leaving no stone unturned to secure the most advantageous position." },
-              { title: "Client-First Approach", desc: "Responsive, clear, and tailored communication at every step." },
-              { title: "Discreet & Trusted", desc: "Absolute confidentiality for sensitive corporate and personal matters." }
-            ].map((pillar, idx) => (
-              <ScrollReveal key={idx} delay={idx * 0.1}>
-                <div className="w-12 h-1 bg-secondary mb-6"></div>
-                <h3 className="font-serif text-2xl mb-4">{pillar.title}</h3>
-                {/* PLACEHOLDER: 1–2 sentences */}
-                <p className="text-white/70">{pillar.desc}</p>
-              </ScrollReveal>
-            ))}
+          <div className="text-center mt-12">
+            <ScrollReveal delay={0.2}>
+              <Link
+                href="/practice-areas"
+                className="inline-block border border-primary text-primary px-8 py-4 text-sm font-semibold uppercase tracking-[0.1em] hover:bg-primary hover:text-white transition-colors duration-300"
+              >
+                View All Practice Areas
+              </Link>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -218,27 +271,30 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
-            {[1, 2, 3].map((_, idx) => (
-              <ScrollReveal key={idx} delay={idx * 0.1}>
-                <div className="group">
-                  <div className="text-xs font-semibold tracking-[0.1em] uppercase text-secondary mb-3">
-                    {/* PLACEHOLDER: Category & Date */}
-                    Corporate Law · Oct 12, 2024
+            {latestInsights.length === 0 ? (
+              <div className="md:col-span-3 rounded-3xl border border-muted/10 bg-background p-8 text-center text-foreground/70">
+                Publish insights in Sanity to populate this section.
+              </div>
+            ) : (
+              latestInsights.map((article, idx) => (
+                <ScrollReveal key={article._id} delay={idx * 0.1}>
+                  <div className="group">
+                    <div className="text-xs font-semibold tracking-[0.1em] uppercase text-secondary mb-3">
+                      {article.category || 'Insight'}
+                    </div>
+                    <h3 className="font-serif text-2xl text-primary font-bold mb-4 group-hover:text-secondary transition-colors">
+                      {article.title}
+                    </h3>
+                    <p className="text-foreground/70 mb-6 line-clamp-3">
+                      {article.summary}
+                    </p>
+                    <Link href={`/insights/${article.slug}`} className="inline-flex items-center text-sm font-semibold uppercase tracking-[0.1em] text-primary group-hover:text-secondary transition-colors">
+                      Read More <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
                   </div>
-                  <h3 className="font-serif text-2xl text-primary font-bold mb-4 group-hover:text-secondary transition-colors">
-                    {/* PLACEHOLDER: Article title */}
-                    Navigating the New Data Protection Regulations
-                  </h3>
-                  <p className="text-foreground/70 mb-6 line-clamp-3">
-                    {/* PLACEHOLDER: One-sentence excerpt */}
-                    An overview of the recent legislative changes and what they mean for businesses operating within the region.
-                  </p>
-                  <Link href="/insights" className="inline-flex items-center text-sm font-semibold uppercase tracking-[0.1em] text-primary group-hover:text-secondary transition-colors">
-                    Read More <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </div>
-              </ScrollReveal>
-            ))}
+                </ScrollReveal>
+              ))
+            )}
           </div>
 
           <div className="text-center">

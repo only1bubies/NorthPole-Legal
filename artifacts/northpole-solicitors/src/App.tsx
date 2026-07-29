@@ -8,6 +8,7 @@ import About from '@/pages/About';
 import PracticeAreas from '@/pages/PracticeAreas';
 import Team from '@/pages/Team';
 import Insights from '@/pages/Insights';
+import InsightsArticle from '@/pages/InsightsArticle';
 import Contact from '@/pages/Contact';
 import PrivacyNotice from '@/pages/PrivacyNotice';
 import LegalDisclaimer from '@/pages/LegalDisclaimer';
@@ -37,6 +38,7 @@ function Router() {
       <Route path="/practice-areas" component={PracticeAreas} />
       <Route path="/team" component={Team} />
       <Route path="/insights" component={Insights} />
+      <Route path="/insights/:slug" component={InsightsArticle} />
       <Route path="/contact" component={Contact} />
       <Route path="/privacy" component={PrivacyNotice} />
       <Route path="/disclaimer" component={LegalDisclaimer} />

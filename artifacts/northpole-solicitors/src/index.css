@@ -42,15 +42,17 @@
   --card-foreground: 0 0% 11%;
   --card-border: 44 55% 54%;
 
+  /* Master brand navy */
+  --brand-navy: 215 48% 20%;
   /* Navy #1a2e4a -> HSL: 215 48% 20% */
-  --primary: 215 48% 20%;
+  --primary: var(--brand-navy);
   /* Off-white */
   --primary-foreground: 41 29% 95%;
 
   /* Gold #c9a84c -> HSL: 44 55% 54% */
   --secondary: 44 55% 54%;
   /* Navy */
-  --secondary-foreground: 215 48% 20%;
+  --secondary-foreground: var(--brand-navy);
 
   /* Muted #6b7280 -> HSL: 218 11% 46% */
   --muted: 218 11% 46%;
