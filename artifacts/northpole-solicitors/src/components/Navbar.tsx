@@ -32,9 +32,9 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">
           <img src="/logo.png" alt="" className="h-20 w-auto" />
-          <span className="font-serif text-secondary text-xl font-semibold tracking-wide leading-tight">
+          <span className="font-serif text-secondary text-2xl font-semibold tracking-wide leading-tight">
             NorthPole<br />
-            <span className="text-sm font-normal tracking-[0.2em] uppercase">Solicitors</span>
+            <span className="text-base font-normal tracking-[0.22em] uppercase">Solicitors</span>
           </span>
         </Link>
 
