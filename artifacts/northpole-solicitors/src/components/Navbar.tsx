@@ -30,8 +30,19 @@ export function Navbar() {
     <header className={`fixed top-0 w-full z-50 transition-colors duration-300 ${navBg} ${isTransparent ? 'text-white' : 'text-primary-foreground'}`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 h-24 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">
-          <img src="/logo.png" alt="NorthPole Solicitors" className="h-20 w-auto" />
+        <Link href="/" className="flex items-center gap-3 group outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">
+          {/* Mark: crop out the text portion of the image; screen blend removes black bg */}
+          <div style={{ width: 52, height: 52, overflow: 'hidden', mixBlendMode: 'screen', flexShrink: 0 }}>
+            <img
+              src="/logo-mark.png"
+              alt=""
+              style={{ width: 84, height: 84, marginLeft: -16, marginTop: -2 }}
+            />
+          </div>
+          <div className="flex flex-col leading-tight">
+            <span className="font-serif text-white text-lg font-semibold tracking-wide">NorthPole</span>
+            <span className="font-sans text-secondary text-[0.6rem] tracking-[0.25em] uppercase">Solicitors</span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}

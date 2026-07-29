@@ -18,7 +18,19 @@ export function Footer() {
         {/* Column 1 */}
         <div>
           <Link href="/" className="flex items-center gap-2 mb-4 group outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm w-fit">
-            <img src="/logo.png" alt="NorthPole Solicitors" className="h-16 w-auto bg-white rounded-sm p-1" />
+            <div className="flex items-center gap-3">
+              <div style={{ width: 44, height: 44, overflow: 'hidden', mixBlendMode: 'screen', flexShrink: 0 }}>
+                <img
+                  src="/logo-mark.png"
+                  alt=""
+                  style={{ width: 71, height: 71, marginLeft: -13, marginTop: -2 }}
+                />
+              </div>
+              <div className="flex flex-col leading-tight">
+                <span className="font-serif text-white text-base font-semibold tracking-wide">NorthPole</span>
+                <span className="font-sans text-secondary text-[0.55rem] tracking-[0.25em] uppercase">Solicitors</span>
+              </div>
+            </div>
           </Link>
           <p className="font-serif italic text-secondary text-lg">
             Legal Excellence.<br/>Trusted Guidance.
