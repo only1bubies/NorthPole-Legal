@@ -20,7 +20,8 @@ export default function Team() {
       name: "Ebubechukwu Odo", /* PLACEHOLDER */
       title: "Partner", /* PLACEHOLDER */
       specialism: "Intellectual Property, Energy and Property Law Practice", /* PLACEHOLDER */
-      initials: "EO"
+      initials: "EO",
+      photo: "/team-odo.jpg"
     },
     {
       id: "2",
@@ -52,8 +53,11 @@ export default function Team() {
             {teamMembers.map((member, idx) => (
               <ScrollReveal key={member.id} delay={idx * 0.1}>
                 <div className="bg-white p-10 border border-muted/10 text-center hover:shadow-xl transition-shadow duration-300 h-full flex flex-col items-center">
-                  <div className="w-40 h-40 rounded-full bg-primary flex items-center justify-center mb-8 border-[3px] border-secondary/30 relative group">
-                    <span className="font-serif text-4xl text-white font-bold">{member.initials}</span>
+                  <div className="w-40 h-40 rounded-full bg-primary flex items-center justify-center mb-8 border-[3px] border-secondary/30 relative group overflow-hidden">
+                    {member.photo
+                      ? <img src={member.photo} alt={member.name} className="w-full h-full object-cover object-top" />
+                      : <span className="font-serif text-4xl text-white font-bold">{member.initials}</span>
+                    }
                     <div className="absolute inset-0 rounded-full border border-secondary scale-110 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-500"></div>
                   </div>
                   
