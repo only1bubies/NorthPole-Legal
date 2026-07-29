@@ -21,7 +21,8 @@ export default function Team() {
       title: "Partner", /* PLACEHOLDER */
       specialism: "Intellectual Property, Energy and Property Law Practice", /* PLACEHOLDER */
       initials: "EO",
-      photo: "/team-odo.jpg"
+      photo: "/team-odo.jpg",
+      linkedinUrl: "https://www.linkedin.com/in/ebubechukwu-odo-02a1132aa"
     },
     {
       id: "2",
@@ -29,7 +30,8 @@ export default function Team() {
       title: "Partner", /* PLACEHOLDER */
       specialism: "Data Privacy and Corporate Governance", /* PLACEHOLDER */
       initials: "B. A",
-      photo: "/team-riagbayire.jpg"
+      photo: "/team-riagbayire.jpg",
+      linkedinUrl: "https://www.linkedin.com/in/benita-riagbayire"
     },
   ];
 
@@ -70,7 +72,9 @@ export default function Team() {
                   <p className="text-foreground/70 text-sm mb-8 flex-grow">{member.specialism}</p>
                   
                   <a 
-                    href="#" 
+                    href={member.linkedinUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label={`LinkedIn profile for ${member.name}`}
                     className="p-2 border border-muted/20 rounded-full hover:border-secondary hover:text-secondary hover:bg-secondary/5 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-secondary text-primary"
                   >
