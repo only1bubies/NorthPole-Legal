@@ -28,16 +28,13 @@ export default function About() {
             
             <div className="prose prose-lg prose-headings:font-serif prose-p:text-foreground/80 max-w-none space-y-6">
               <p>
-                {/* PLACEHOLDER: Founding year and context */}
-                Founded in [Year], NorthPole Solicitors was established with a singular vision: to deliver world-class commercial legal services within the Nigerian jurisdiction. We recognized a growing need among businesses and creators for counsel that was not merely legally sound, but commercially pragmatic.
+                Founded in 2026, NorthPole Solicitors was established with a bold vision: to deliver exceptional legal services rooted in integrity, excellence, and a genuine commitment to the people and businesses we serve.
               </p>
               <p>
-                {/* PLACEHOLDER: Founding partners / history */}
-                Our founding partners brought together decades of collective experience from top-tier firms, corporate boardrooms, and specialized intellectual property practices. This convergence of expertise allows us to view legal challenges through a multi-disciplinary lens.
+                We believe that the practice of law is about more than resolving legal issues. It is about building trust, protecting opportunities, and helping our clients make confident decisions in an increasingly complex world. Every instruction we receive is approached with diligence, strategic thinking, and unwavering professionalism.
               </p>
               <p>
-                {/* PLACEHOLDER: Current state and future outlook */}
-                Today, we continue to serve a diverse roster of clients—from ambitious startups to established multinational corporations. We remain steadfast in our commitment to excellence, continually adapting our practice to address the evolving complexities of the modern commercial landscape.
+                As a full-service law firm based in Lagos, Nigeria, we provide comprehensive legal solutions across a broad range of practice areas, serving individuals, entrepreneurs, startups, established businesses, and institutions. Whether guiding a growing business, advising on a commercial transaction, resolving a dispute, or protecting our clients’ interests, our focus remains the same: delivering practical, timely, and effective legal solutions. Although our journey has only just begun, our ambition is clear. We are building a law firm distinguished not only by legal excellence, but by the quality of our relationships, the integrity of our service, and the confidence our clients place in us. At NorthPole Solicitors, we are committed to growing alongside our clients and becoming a trusted legal partner for generations to come.
               </p>
             </div>
           </ScrollReveal>
