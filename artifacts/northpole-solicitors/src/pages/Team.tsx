@@ -28,7 +28,8 @@ export default function Team() {
       name: "Benita Riagbayire", /* PLACEHOLDER */
       title: "Partner", /* PLACEHOLDER */
       specialism: "Data Privacy and Corporate Governance", /* PLACEHOLDER */
-      initials: "B. A"
+      initials: "B. A",
+      photo: "/team-riagbayire.jpg"
     },
   ];
 
