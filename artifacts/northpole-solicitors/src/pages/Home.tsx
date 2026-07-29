@@ -9,8 +9,9 @@ import { useEffect, useState } from 'react';
 import { Link } from 'wouter';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { useDocumentMeta } from '@/hooks/useDocumentMeta';
-import { ArrowRight, Briefcase, CreditCard, FileText, Globe2, Gavel, Home as HomeIcon, Lock, Scale, Shield, Users } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { getLatestInsights, type InsightArticle } from '@/lib/sanity';
+import { practiceAreas } from '@/data/practiceAreas';
 
 export default function Home() {
   useDocumentMeta("Home", "Full-service general practice law firm serving individuals, businesses and institutions with practical legal support.");
@@ -167,32 +168,25 @@ export default function Home() {
             </div>
           </ScrollReveal>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: Briefcase, title: "Corporate & Commercial Law", desc: "Advising on governance, contracts, transactions and general business operations." },
-              { icon: Scale, title: "Litigation & Dispute Resolution", desc: "Resolving disputes through negotiation, mediation and courtroom advocacy." },
-              { icon: HomeIcon, title: "Property & Real Estate", desc: "Guiding property transactions, leasing and land use matters with care." },
-              { icon: Users, title: "Employment & Labour Law", desc: "Supporting employers and individuals on workplace rights, contracts and disputes." },
-              { icon: Shield, title: "Family Law", desc: "Assisting families with sensitive matters such as separation, support and guardianship." },
-              { icon: Lock, title: "Intellectual Property", desc: "Protecting creative works, brands and innovations with strategic advice." },
-              { icon: Gavel, title: "Criminal Defence", desc: "Providing practical representation for individuals facing criminal charges." },
-              { icon: FileText, title: "Probate & Estate Planning", desc: "Helping clients plan for succession and manage estate matters responsibly." },
-              { icon: CreditCard, title: "Banking & Finance", desc: "Advising on lending, regulatory compliance and financial agreements." },
-              { icon: Globe2, title: "Immigration Law", desc: "Helping individuals and organisations navigate migration and visa matters." },
-            ].map((area, idx) => (
-              <ScrollReveal key={idx} delay={idx * 0.1}>
-                <Link href="/practice-areas" className="block h-full outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2">
-                  <div className="bg-primary p-8 h-full group hover:bg-primary/90 transition-colors duration-300 border border-transparent hover:border-secondary/30">
-                    <area.icon className="w-10 h-10 text-secondary mb-6" />
-                    <h3 className="font-serif text-2xl text-white mb-4">{area.title}</h3>
-                    <p className="text-white/70 mb-8">{area.desc}</p>
-                    <span className="inline-flex items-center text-secondary text-sm font-semibold uppercase tracking-[0.1em] group-hover:translate-x-2 transition-transform duration-300">
-                      Explore <ArrowRight className="w-4 h-4 ml-2" />
-                    </span>
-                  </div>
-                </Link>
-              </ScrollReveal>
-            ))}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {practiceAreas.map((area, idx) => {
+              const Icon = area.icon;
+
+              return (
+                <ScrollReveal key={area.id} delay={idx * 0.1}>
+                  <Link href={area.href} className="block h-full outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2">
+                    <div className="bg-primary p-8 h-full flex flex-col group hover:bg-primary/90 transition-colors duration-300 border border-transparent hover:border-secondary/30">
+                      <Icon className="w-10 h-10 text-secondary mb-6" />
+                      <h3 className="font-serif text-2xl text-white mb-4">{area.title}</h3>
+                      <p className="text-white/70 mb-8 flex-grow">{area.description}</p>
+                      <span className="inline-flex items-center text-secondary text-sm font-semibold uppercase tracking-[0.1em] group-hover:translate-x-2 transition-transform duration-300 mt-auto">
+                        Explore <ArrowRight className="w-4 h-4 ml-2" />
+                      </span>
+                    </div>
+                  </Link>
+                </ScrollReveal>
+              );
+            })}
           </div>
 
           <div className="text-center mt-12">
