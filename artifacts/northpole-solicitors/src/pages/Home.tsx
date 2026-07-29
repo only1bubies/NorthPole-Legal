@@ -168,18 +168,18 @@ export default function Home() {
             </div>
           </ScrollReveal>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {practiceAreas.map((area, idx) => {
               const Icon = area.icon;
 
               return (
                 <ScrollReveal key={area.id} delay={idx * 0.1}>
-                  <Link href={area.href} className="block h-full outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2">
-                    <div className="bg-primary p-8 h-full flex flex-col group hover:bg-primary/90 transition-colors duration-300 border border-transparent hover:border-secondary/30">
+                  <Link href={area.homeHref} className="block h-full outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2">
+                    <div className="bg-primary p-8 h-full group hover:bg-primary/90 transition-colors duration-300 border border-transparent hover:border-secondary/30">
                       <Icon className="w-10 h-10 text-secondary mb-6" />
                       <h3 className="font-serif text-2xl text-white mb-4">{area.title}</h3>
-                      <p className="text-white/70 mb-8 flex-grow">{area.description}</p>
-                      <span className="inline-flex items-center text-secondary text-sm font-semibold uppercase tracking-[0.1em] group-hover:translate-x-2 transition-transform duration-300 mt-auto">
+                      <p className="text-white/70 mb-8">{area.shortDescription}</p>
+                      <span className="inline-flex items-center text-secondary text-sm font-semibold uppercase tracking-[0.1em] group-hover:translate-x-2 transition-transform duration-300">
                         Explore <ArrowRight className="w-4 h-4 ml-2" />
                       </span>
                     </div>

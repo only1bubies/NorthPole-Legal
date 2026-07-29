@@ -1,11 +1,12 @@
 import type { LucideIcon } from 'lucide-react';
-import { Briefcase, Gavel, Globe2, Lock, Scale, Shield } from 'lucide-react';
+import { Briefcase, Hammer, Lock, Music, Scale, Shield } from 'lucide-react';
 
 export interface PracticeAreaItem {
   id: string;
   title: string;
-  description: string;
+  shortDescription: string;
   icon: LucideIcon;
+  homeHref: string;
   href: string;
   order: number;
   fullDescription: string[];
@@ -16,9 +17,10 @@ export const practiceAreas: PracticeAreaItem[] = [
   {
     id: 'intellectual-property',
     title: 'Intellectual Property',
-    description:
-      'Strategic protection for brands, content, technology and commercial assets.',
-    icon: Lock,
+    shortDescription:
+      'Comprehensive protection and enforcement of trademarks, patents, and copyright.',
+    icon: Shield,
+    homeHref: '/practice-areas',
     href: '/practice-areas#intellectual-property',
     order: 1,
     fullDescription: [
@@ -37,9 +39,10 @@ export const practiceAreas: PracticeAreaItem[] = [
   {
     id: 'entertainment-media',
     title: 'Entertainment & Media',
-    description:
-      'Practical counsel for creators, production houses and media businesses.',
-    icon: Globe2,
+    shortDescription:
+      'Strategic counsel for artists, producers, and media organizations.',
+    icon: Music,
+    homeHref: '/practice-areas',
     href: '/practice-areas#entertainment-media',
     order: 2,
     fullDescription: [
@@ -57,10 +60,11 @@ export const practiceAreas: PracticeAreaItem[] = [
   },
   {
     id: 'corporate-commercial',
-    title: 'Corporate & Commercial Law',
-    description:
-      'Clear, commercially focused advice for formation, governance and transactions.',
+    title: 'Corporate & Commercial',
+    shortDescription:
+      'Advising on governance, transactions, and corporate structuring.',
     icon: Briefcase,
+    homeHref: '/practice-areas',
     href: '/practice-areas#corporate-commercial',
     order: 3,
     fullDescription: [
@@ -77,12 +81,13 @@ export const practiceAreas: PracticeAreaItem[] = [
     ],
   },
   {
-    id: 'technology-data',
-    title: 'Technology & Data Protection',
-    description:
-      'Guidance on compliance, cyber risk and technology transactions.',
-    icon: Shield,
-    href: '/practice-areas#technology-data',
+    id: 'tech-data-protection',
+    title: 'Tech & Data Protection',
+    shortDescription:
+      'Navigating regulatory compliance and data privacy requirements.',
+    icon: Lock,
+    homeHref: '/practice-areas',
+    href: '/practice-areas#tech-data-protection',
     order: 4,
     fullDescription: [
       'As technology reshapes commerce, regulatory frameworks are continually evolving. We help tech companies and traditional businesses alike navigate this shifting landscape.',
@@ -100,9 +105,10 @@ export const practiceAreas: PracticeAreaItem[] = [
   {
     id: 'dispute-resolution',
     title: 'Dispute Resolution',
-    description:
-      'Practical strategy to resolve commercial disputes efficiently and discreetly.',
+    shortDescription:
+      'Alternative dispute resolution and arbitration strategies.',
     icon: Scale,
+    homeHref: '/practice-areas',
     href: '/practice-areas#dispute-resolution',
     order: 5,
     fullDescription: [
@@ -121,9 +127,10 @@ export const practiceAreas: PracticeAreaItem[] = [
   {
     id: 'litigation',
     title: 'Litigation',
-    description:
-      'Robust advocacy in complex disputes before Nigerian courts and tribunals.',
-    icon: Gavel,
+    shortDescription:
+      'Robust representation in complex commercial litigation.',
+    icon: Hammer,
+    homeHref: '/practice-areas',
     href: '/practice-areas#litigation',
     order: 6,
     fullDescription: [
