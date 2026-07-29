@@ -115,7 +115,7 @@ export default function PrivacyNotice() {
               <h2>11. Contact Us</h2>
               <p>
                 {/* PLACEHOLDER: Insert privacy notice content here */}
-                If you have any questions about this Privacy Notice or our data protection practices, please contact us at: <a href="mailto:privacy@northpolesolicitors.com">privacy@northpolesolicitors.com</a>.
+                If you have any questions about this Privacy Notice or our data protection practices, please contact us at: <a href="mailto:info@northpolesolicitors.com">info@northpolesolicitors.com</a>.
               </p>
 
             </div>
