@@ -47,9 +47,8 @@ export default function Contact() {
                     <div>
                       <strong className="block text-primary font-sans font-semibold mb-1">Office Address</strong>
                       <address className="not-italic">
-                        {/* PLACEHOLDER: Insert firm address here */}
-                        12 Boardroom Avenue<br />
-                        Victoria Island, Lagos<br />
+                        19 Oguntuga Street<br />
+                        Yaba, Lagos<br />
                         Nigeria
                       </address>
                     </div>

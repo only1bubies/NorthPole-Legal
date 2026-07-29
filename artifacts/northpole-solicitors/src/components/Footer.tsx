@@ -47,9 +47,8 @@ export function Footer() {
           <h3 className="font-sans font-semibold uppercase tracking-[0.1em] text-sm mb-6 text-white/50">Contact</h3>
           <address className="not-italic text-white space-y-3">
             <p>
-              {/* PLACEHOLDER: Insert firm address here */}
-              12 Boardroom Avenue<br/>
-              Victoria Island, Lagos<br/>
+              19 Oguntuga Street<br/>
+              Yaba, Lagos<br/>
               Nigeria
             </p>
             <p className="pt-2">
