@@ -177,15 +177,16 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             {[
-              { initials: "EO", name: "Ebubechukwu Odo", title: "Partner", specialism: "Intellectual Property, Energy and Property Law Practice" },
-              { initials: "BA", name: "Benita Riagbayire", title: "Partner", specialism: "Data Privacy and Corporate Governance" },
+              { initials: "EO", name: "Ebubechukwu Odo", title: "Partner", specialism: "Intellectual Property, Energy and Property Law Practice", photo: "/team-odo.jpg" },
+              { initials: "BA", name: "Benita Riagbayire", title: "Partner", specialism: "Data Privacy and Corporate Governance", photo: "/team-riagbayire.jpg" },
             ].map((member, idx) => (
               <ScrollReveal key={idx} delay={idx * 0.1}>
                 <div className="bg-white p-8 border border-muted/10 text-center hover:shadow-lg transition-shadow duration-300">
-                  <div className="w-32 h-32 mx-auto rounded-full bg-primary border-2 border-secondary flex items-center justify-center mb-6">
-                    <span className="font-serif text-3xl text-white font-bold">
-                      {member.initials}
-                    </span>
+                  <div className="w-32 h-32 mx-auto rounded-full bg-primary border-2 border-secondary flex items-center justify-center mb-6 overflow-hidden">
+                    {member.photo
+                      ? <img src={member.photo} alt={member.name} className="w-full h-full object-cover object-top" />
+                      : <span className="font-serif text-3xl text-white font-bold">{member.initials}</span>
+                    }
                   </div>
                   <h3 className="font-serif text-2xl text-primary font-bold mb-2">
                     {member.name}
