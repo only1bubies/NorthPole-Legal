@@ -53,7 +53,7 @@ export function Footer() {
             </p>
             <p className="pt-2">
               {/* PLACEHOLDER: Insert phone number here */}
-              <a href="tel:+234000000000" className="hover:text-secondary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">+234 (0) 123 456 7890</a>
+              <a href="tel:+2348143542771" className="hover:text-secondary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">+234 8143542771</a>
             </p>
             <p>
               {/* PLACEHOLDER: Insert email address here */}

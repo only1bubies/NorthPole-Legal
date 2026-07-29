@@ -59,7 +59,7 @@ export default function Contact() {
                     <div>
                       <strong className="block text-primary font-sans font-semibold mb-1">Telephone</strong>
                       {/* PLACEHOLDER: Insert phone number here */}
-                      <a href="tel:+234000000000" className="hover:text-secondary transition-colors">+234 (0) 123 456 7890</a>
+                      <a href="tel:+2348143542771" className="hover:text-secondary transition-colors">+234 8143542771</a>
                     </div>
                   </div>
 
