@@ -66,10 +66,10 @@ export function Footer() {
         <div>
           <h3 className="font-sans font-semibold uppercase tracking-[0.1em] text-sm mb-6 text-white/50">Follow Us</h3>
           <div className="flex gap-4">
-            <a href="#" aria-label="LinkedIn" className="p-2 border border-white/20 rounded-sm hover:border-secondary hover:text-secondary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-secondary">
+            <a href="https://www.linkedin.com/company/northpole-solicitors/" target="_blank" rel="noopener noreferrer" aria-label="NorthPole Solicitors on LinkedIn" className="p-2 border border-white/20 rounded-sm hover:border-secondary hover:text-secondary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-secondary">
               <Linkedin className="w-5 h-5" />
             </a>
-            <a href="#" aria-label="Twitter" className="p-2 border border-white/20 rounded-sm hover:border-secondary hover:text-secondary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-secondary">
+            <a href="https://x.com/northpolelp" target="_blank" rel="noopener noreferrer" aria-label="NorthPole Solicitors on X" className="p-2 border border-white/20 rounded-sm hover:border-secondary hover:text-secondary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-secondary">
               <Twitter className="w-5 h-5" />
             </a>
             <a href="https://www.instagram.com/northpole_solicitors" target="_blank" rel="noopener noreferrer" aria-label="NorthPole Solicitors on Instagram" className="p-2 border border-white/20 rounded-sm hover:border-secondary hover:text-secondary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-secondary">
