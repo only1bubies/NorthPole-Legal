@@ -3,6 +3,7 @@ import { Link } from 'wouter';
 import { ArrowLeft } from 'lucide-react';
 
 import { PageHero } from '@/components/PageHero';
+import PortableTextContent from '@/components/PortableTextContent';
 import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 import { getInsightBySlug, type InsightArticle, urlFor } from '@/lib/sanity';
 
@@ -22,30 +23,6 @@ function formatDate(value?: string) {
     day: 'numeric',
     year: 'numeric',
   }).format(new Date(value));
-}
-
-function renderPortableText(blocks?: Array<Record<string, unknown>>) {
-  if (!Array.isArray(blocks)) {
-    return null;
-  }
-
-  return (
-    <div className="space-y-6">
-      {blocks.map((block, index) => {
-        const blockData = block as { _type?: string; children?: Array<{ text?: string }> };
-
-        if (blockData._type !== 'block' || !Array.isArray(blockData.children)) {
-          return null;
-        }
-
-        return (
-          <p key={index} className="text-lg leading-relaxed text-foreground/80">
-            {blockData.children.map((child) => child.text || '').join('')}
-          </p>
-        );
-      })}
-    </div>
-  );
 }
 
 export default function InsightsArticle({ params }: InsightsArticleProps) {
@@ -122,11 +99,8 @@ export default function InsightsArticle({ params }: InsightsArticleProps) {
                 ) : null}
               </div>
 
-              <div className="prose max-w-none prose-headings:font-serif prose-headings:text-primary prose-p:text-foreground/80 prose-a:text-secondary">
-                <p className="text-lg text-foreground/70 leading-relaxed mb-8">
-                  {article.summary}
-                </p>
-                {renderPortableText(article.body)}
+              <div className="space-y-6">
+                <PortableTextContent value={article.body as Array<Record<string, unknown>> | null} />
               </div>
             </>
           )}
