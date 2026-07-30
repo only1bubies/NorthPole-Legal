@@ -61,8 +61,24 @@ export const sanityClient = hasSanityConfig
 
 const builder = sanityClient ? imageUrlBuilder(sanityClient) : null;
 
-export function urlFor(source: SanityImageSource) {
-  return builder?.image(source).auto('format').fit('max').url() || '';
+export interface SanityImageUrlOptions {
+  width?: number;
+  quality?: number;
+}
+
+export function urlFor(source: SanityImageSource, options: SanityImageUrlOptions = {}) {
+  const { width, quality } = options;
+  let imageBuilder = builder?.image(source).auto('format').fit('max');
+
+  if (typeof width === 'number') {
+    imageBuilder = imageBuilder?.width(width);
+  }
+
+  if (typeof quality === 'number') {
+    imageBuilder = imageBuilder?.quality(quality);
+  }
+
+  return imageBuilder?.url() || '';
 }
 
 const insightProjection = `{

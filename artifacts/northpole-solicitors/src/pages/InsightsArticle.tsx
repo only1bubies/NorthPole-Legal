@@ -25,6 +25,30 @@ function formatDate(value?: string) {
   }).format(new Date(value));
 }
 
+function getFeaturedImageAlt(image: InsightArticle['featuredImage'], fallbackTitle: string) {
+  if (typeof image === 'object' && image && 'alt' in image && typeof image.alt === 'string' && image.alt.trim()) {
+    return image.alt;
+  }
+
+  return fallbackTitle;
+}
+
+function getFeaturedImageSrcSet(image: InsightArticle['featuredImage']) {
+  if (!image) {
+    return null;
+  }
+
+  const widths = [400, 800, 1200, 1600];
+  const srcSet = widths
+    .map((width) => `${urlFor(image, { width, quality: 85 })} ${width}w`)
+    .join(', ');
+
+  return {
+    src: urlFor(image, { width: 1200, quality: 85 }),
+    srcSet,
+  };
+}
+
 export default function InsightsArticle({ params }: InsightsArticleProps) {
   const slug = params?.slug;
   const [article, setArticle] = useState<InsightArticle | null>(null);
@@ -79,13 +103,27 @@ export default function InsightsArticle({ params }: InsightsArticleProps) {
             </div>
           ) : (
             <>
-              {article.featuredImage ? (
-                <img
-                  src={urlFor(article.featuredImage)}
-                  alt={article.title}
-                  className="w-full h-[320px] object-cover rounded-3xl border border-muted/10 mb-8"
-                />
-              ) : null}
+              {article.featuredImage ? (() => {
+                const featuredImage = getFeaturedImageSrcSet(article.featuredImage);
+
+                if (!featuredImage) {
+                  return null;
+                }
+
+                return (
+                  <div className="mx-auto mb-8 max-w-4xl rounded-3xl border border-muted/10 bg-muted/5 p-2 md:p-3">
+                    <img
+                      src={featuredImage.src}
+                      srcSet={featuredImage.srcSet}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 900px"
+                      alt={getFeaturedImageAlt(article.featuredImage, article.title)}
+                      loading="eager"
+                      decoding="async"
+                      className="block h-auto w-full rounded-[calc(1.5rem-0.25rem)] object-contain object-center"
+                    />
+                  </div>
+                );
+              })() : null}
 
               <div className="flex flex-wrap items-center gap-3 text-sm uppercase tracking-[0.1em] text-secondary mb-6">
                 <span>{article.category || 'Insight'}</span>
