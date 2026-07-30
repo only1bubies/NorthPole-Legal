@@ -1,14 +1,5 @@
-import type { IncomingMessage, ServerResponse } from 'node:http';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
-
-type ContactRequest = IncomingMessage & {
-  body?: unknown;
-};
-
-type ContactResponse = ServerResponse & {
-  status: (code: number) => ContactResponse;
-  json: (body: unknown) => void;
-};
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const recipient = 'info@northpolesolicitors.com';
@@ -52,8 +43,8 @@ function escapeHtml(value: string): string {
 }
 
 export default async function handler(
-  request: ContactRequest,
-  response: ContactResponse,
+  request: VercelRequest,
+  response: VercelResponse,
 ) {
   if (request.method !== 'POST') {
     response.status(405).json({ error: 'Method not allowed.' });
