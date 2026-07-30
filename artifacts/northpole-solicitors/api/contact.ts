@@ -97,39 +97,104 @@ export default async function handler(
   const safeTelephone = escapeHtml(telephone);
   const safeEnquiry = escapeHtml(enquiry);
   const safeMessage = escapeHtml(message).replace(/\n/g, '<br />');
+  const firstName = fullName.split(/\s+/)[0] || fullName;
+  const safeFirstName = escapeHtml(firstName);
+  const submissionId = crypto.randomUUID();
 
-  const { error } = await resend.emails.send({
-    from: sender,
-    to: recipient,
-    replyTo: email,
-    subject: `New Website Enquiry – ${enquiry}`,
-    text: [
-      'New Website Enquiry',
-      '',
-      `Full Name: ${fullName}`,
-      `Email Address: ${email}`,
-      `Telephone: ${telephone}`,
-      `General Nature of Enquiry: ${enquiry}`,
-      '',
-      'Message:',
-      message,
-    ].join('\n'),
-    html: `
-      <h2>New Website Enquiry</h2>
-      <p><strong>Full Name:</strong> ${safeName}</p>
-      <p><strong>Email Address:</strong> ${safeEmail}</p>
-      <p><strong>Telephone:</strong> ${safeTelephone}</p>
-      <p><strong>General Nature of Enquiry:</strong> ${safeEnquiry}</p>
-      <h3>Message</h3>
-      <p>${safeMessage}</p>
-    `,
-  });
-
-  if (error) {
-    console.error('Resend contact email failed:', error);
+  let notificationResult;
+  try {
+    notificationResult = await resend.emails.send(
+      {
+        from: sender,
+        to: recipient,
+        replyTo: email,
+        subject: `New Website Enquiry – ${enquiry}`,
+        text: [
+          'New Website Enquiry',
+          '',
+          `Full Name: ${fullName}`,
+          `Email Address: ${email}`,
+          `Telephone: ${telephone}`,
+          `General Nature of Enquiry: ${enquiry}`,
+          '',
+          'Message:',
+          message,
+        ].join('\n'),
+        html: `
+          <h2>New Website Enquiry</h2>
+          <p><strong>Full Name:</strong> ${safeName}</p>
+          <p><strong>Email Address:</strong> ${safeEmail}</p>
+          <p><strong>Telephone:</strong> ${safeTelephone}</p>
+          <p><strong>General Nature of Enquiry:</strong> ${safeEnquiry}</p>
+          <h3>Message</h3>
+          <p>${safeMessage}</p>
+        `,
+      },
+      { idempotencyKey: `contact-notification/${submissionId}` },
+    );
+  } catch {
     response.status(502).json({ error: 'Unable to send your enquiry right now.' });
     return;
   }
 
-  response.status(200).json({ ok: true });
+  if (notificationResult.error) {
+    response.status(502).json({ error: 'Unable to send your enquiry right now.' });
+    return;
+  }
+
+  let acknowledgementSent = false;
+  try {
+    const acknowledgementResult = await resend.emails.send(
+      {
+        from: sender,
+        to: email,
+        replyTo: recipient,
+        subject: 'We\'ve received your enquiry — NorthPole Solicitors',
+        text: [
+          `Dear ${firstName},`,
+          '',
+          'Thank you for contacting NorthPole Solicitors.',
+          '',
+          `We have received your enquiry regarding “${enquiry}”. A member of our team will review your message and respond as soon as possible.`,
+          '',
+          'Please note that submitting an enquiry through our website does not create a lawyer-client relationship. Do not send confidential or time-sensitive information until the firm has confirmed that it can act for you.',
+          '',
+          'Kind regards,',
+          '',
+          'NorthPole Solicitors',
+          '19 Oguntuga Street',
+          'Yaba, Lagos, Nigeria',
+          '',
+          recipient,
+          'https://northpolesolicitors.com',
+        ].join('\n'),
+        html: `
+          <p>Dear ${safeFirstName},</p>
+          <p>Thank you for contacting NorthPole Solicitors.</p>
+          <p>We have received your enquiry regarding “${safeEnquiry}”. A member of our team will review your message and respond as soon as possible.</p>
+          <p>Please note that submitting an enquiry through our website does not create a lawyer-client relationship. Do not send confidential or time-sensitive information until the firm has confirmed that it can act for you.</p>
+          <p>Kind regards,</p>
+          <p>
+            NorthPole Solicitors<br />
+            19 Oguntuga Street<br />
+            Yaba, Lagos, Nigeria
+          </p>
+          <p>
+            <a href="mailto:${recipient}">${recipient}</a><br />
+            <a href="https://northpolesolicitors.com">https://northpolesolicitors.com</a>
+          </p>
+        `,
+      },
+      { idempotencyKey: `contact-acknowledgement/${submissionId}` },
+    );
+    acknowledgementSent = !acknowledgementResult.error;
+  } catch {
+    acknowledgementSent = false;
+  }
+
+  if (!acknowledgementSent) {
+    console.error('Contact acknowledgement email failed');
+  }
+
+  response.status(200).json({ ok: true, acknowledgementSent });
 }

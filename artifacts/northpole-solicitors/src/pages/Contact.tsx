@@ -15,6 +15,7 @@ export default function Contact() {
   useDocumentMeta("Contact Us", "Get in touch with NorthPole Solicitors to discuss your legal requirements.");
 
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [acknowledgementSent, setAcknowledgementSent] = useState(false);
   const [formError, setFormError] = useState('');
   const formStartedAt = useRef(Date.now());
   const submissionInFlight = useRef(false);
@@ -50,6 +51,8 @@ export default function Contact() {
         return;
       }
 
+      const result = await response.json().catch(() => null);
+      setAcknowledgementSent(result?.acknowledgementSent === true);
       setFormState('success');
     } catch {
       setFormState('idle');
@@ -143,11 +146,14 @@ export default function Contact() {
                     </div>
                     <h3 className="font-serif text-2xl font-bold text-primary mb-4">Message Sent</h3>
                     <p className="text-foreground/80">
-                      Thank you for your enquiry. A member of our team will be in touch shortly.
+                      {acknowledgementSent
+                        ? 'Thank you. Your enquiry has been received successfully. We have also sent a confirmation to the email address you provided.'
+                        : 'Thank you. Your enquiry has been received successfully. A member of our team will be in touch shortly.'}
                     </p>
                     <button 
                       onClick={() => {
                         formStartedAt.current = Date.now();
+                        setAcknowledgementSent(false);
                         setFormError('');
                         setFormState('idle');
                       }}
