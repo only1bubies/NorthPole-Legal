@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'wouter';
 import { ArrowLeft } from 'lucide-react';
+import type { PortableTextBlock } from '@portabletext/react';
 
 import { PageHero } from '@/components/PageHero';
 import PortableTextContent from '@/components/PortableTextContent';
@@ -138,7 +139,9 @@ export default function InsightsArticle({ params }: InsightsArticleProps) {
               </div>
 
               <div className="space-y-6">
-                <PortableTextContent value={article.body as Array<Record<string, unknown>> | null} />
+                <PortableTextContent
+                  value={article.body ? (article.body as unknown as PortableTextBlock[]) : null}
+                />
               </div>
             </>
           )}

@@ -81,6 +81,7 @@
     "@sanity/client": "^7.25.0",
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^6.6.0",
+    "resend": "^6.18.1",
     "sanity": "^6.6.0",
     "styled-components": "^6.4.4"
   }

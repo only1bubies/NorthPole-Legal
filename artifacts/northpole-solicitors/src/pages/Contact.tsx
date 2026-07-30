@@ -5,7 +5,7 @@
  * Replace placeholder text with real firm content before publishing.
  */
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { PageHero } from '@/components/PageHero';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { useDocumentMeta } from '@/hooks/useDocumentMeta';
@@ -15,14 +15,48 @@ export default function Contact() {
   useDocumentMeta("Contact Us", "Get in touch with NorthPole Solicitors to discuss your legal requirements.");
 
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [formError, setFormError] = useState('');
+  const formStartedAt = useRef(Date.now());
+  const submissionInFlight = useRef(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (submissionInFlight.current) return;
+
+    submissionInFlight.current = true;
     setFormState('submitting');
-    // Simulate API call
-    setTimeout(() => {
+    setFormError('');
+
+    const formData = new FormData(e.currentTarget);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: formData.get('fullName'),
+          email: formData.get('email'),
+          telephone: formData.get('telephone'),
+          enquiry: formData.get('enquiry'),
+          message: formData.get('message'),
+          website: formData.get('website'),
+          submittedAt: formStartedAt.current,
+        }),
+      });
+
+      if (!response.ok) {
+        const result = await response.json().catch(() => null);
+        setFormState('idle');
+        setFormError(result?.error || 'Unable to send your enquiry right now. Please try again.');
+        return;
+      }
+
       setFormState('success');
-    }, 1500);
+    } catch {
+      setFormState('idle');
+      setFormError('Unable to send your enquiry right now. Please try again.');
+    } finally {
+      submissionInFlight.current = false;
+    }
   };
 
   return (
@@ -112,7 +146,11 @@ export default function Contact() {
                       Thank you for your enquiry. A member of our team will be in touch shortly.
                     </p>
                     <button 
-                      onClick={() => setFormState('idle')}
+                      onClick={() => {
+                        formStartedAt.current = Date.now();
+                        setFormError('');
+                        setFormState('idle');
+                      }}
                       className="mt-8 text-secondary font-semibold uppercase tracking-[0.1em] hover:text-primary transition-colors text-sm"
                     >
                       Send another message
@@ -125,6 +163,7 @@ export default function Contact() {
                       <input 
                         type="text" 
                         id="name" 
+                        name="fullName"
                         required
                         className="w-full bg-white border border-muted/30 px-4 py-3 text-foreground focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors"
                       />
@@ -135,6 +174,7 @@ export default function Contact() {
                       <input 
                         type="email" 
                         id="email" 
+                        name="email"
                         required
                         className="w-full bg-white border border-muted/30 px-4 py-3 text-foreground focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors"
                       />
@@ -145,6 +185,7 @@ export default function Contact() {
                       <input 
                         type="tel" 
                         id="phone" 
+                        name="telephone"
                         required
                         className="w-full bg-white border border-muted/30 px-4 py-3 text-foreground focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors"
                       />
@@ -154,6 +195,7 @@ export default function Contact() {
                       <label htmlFor="enquiry_type" className="block text-sm font-semibold uppercase tracking-[0.05em] text-primary mb-2">General Nature of Enquiry *</label>
                       <select 
                         id="enquiry_type" 
+                        name="enquiry"
                         required
                         className="w-full bg-white border border-muted/30 px-4 py-3 text-foreground focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors appearance-none"
                         style={{ backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1em' }}
@@ -173,14 +215,30 @@ export default function Contact() {
                       <label htmlFor="message" className="block text-sm font-semibold uppercase tracking-[0.05em] text-primary mb-2">Message *</label>
                       <textarea 
                         id="message" 
+                        name="message"
                         rows={5}
                         required
                         className="w-full bg-white border border-muted/30 px-4 py-3 text-foreground focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors resize-y"
                       ></textarea>
                     </div>
 
-                    <button 
-                      type="submit" 
+                    <input
+                      type="text"
+                      name="website"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      aria-hidden="true"
+                      className="hidden"
+                    />
+
+                    {formError && (
+                      <p role="alert" className="text-sm text-red-700" aria-live="polite">
+                        {formError}
+                      </p>
+                    )}
+
+                    <button
+                      type="submit"
                       disabled={formState === 'submitting'}
                       className="w-full bg-primary text-secondary px-8 py-4 text-sm font-semibold uppercase tracking-[0.1em] hover:bg-primary/90 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed hover:-translate-y-0.5"
                     >
