@@ -54,10 +54,21 @@ export default function InsightsArticle({ params }: InsightsArticleProps) {
   const slug = params?.slug;
   const [article, setArticle] = useState<InsightArticle | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const articleTitle = article?.title || 'Insight';
+  const articleDescription = article?.summary || article?.seoDescription || 'Legal commentary and thought leadership from NorthPole Solicitors.';
+  const articleUrl = slug ? `https://northpolesolicitors.com/insights/${slug}` : undefined;
+  const articleImage = article?.featuredImage ? urlFor(article.featuredImage, { width: 1200, quality: 85 }) : undefined;
 
   useDocumentMeta(
-    article?.seoTitle || 'Insight',
-    article?.seoDescription || 'Legal commentary and thought leadership from NorthPole Solicitors.'
+    `${articleTitle} | NorthPole Solicitors`,
+    articleDescription,
+    {
+      titleIsComplete: true,
+      socialTitle: articleTitle,
+      type: 'article',
+      url: articleUrl,
+      image: articleImage || undefined,
+    },
   );
 
   useEffect(() => {

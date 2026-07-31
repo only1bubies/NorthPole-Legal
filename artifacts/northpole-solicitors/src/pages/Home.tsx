@@ -14,7 +14,14 @@ import { getLatestInsights, type InsightArticle } from '@/lib/sanity';
 import { practiceAreas } from '@/data/practiceAreas';
 
 export default function Home() {
-  useDocumentMeta("Home", "Full-service general practice law firm serving individuals, businesses and institutions with practical legal support.");
+  useDocumentMeta(
+    "NorthPole Solicitors | Full-Service Law Firm in Nigeria",
+    "NorthPole Solicitors is a full-service law firm in Nigeria providing practical legal solutions in Corporate & Commercial Law, Intellectual Property, Real Estate, Dispute Resolution and more.",
+    {
+      titleIsComplete: true,
+      url: 'https://northpolesolicitors.com/',
+    },
+  );
 
   const [latestInsights, setLatestInsights] = useState<InsightArticle[]>([]);
 
