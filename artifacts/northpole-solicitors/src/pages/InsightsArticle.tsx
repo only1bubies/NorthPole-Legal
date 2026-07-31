@@ -54,10 +54,13 @@ export default function InsightsArticle({ params }: InsightsArticleProps) {
   const slug = params?.slug;
   const [article, setArticle] = useState<InsightArticle | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const articleTitle = article?.title || 'Insight';
-  const articleDescription = article?.summary || article?.seoDescription || 'Legal commentary and thought leadership from NorthPole Solicitors.';
+  const articleTitle = article?.seoTitle || article?.title || 'Insight';
+  const articleDescription = article?.seoDescription || article?.summary || 'Legal commentary and thought leadership from NorthPole Solicitors.';
   const articleUrl = slug ? `https://northpolesolicitors.com/insights/${slug}` : undefined;
-  const articleImage = article?.featuredImage ? urlFor(article.featuredImage, { width: 1200, quality: 85 }) : undefined;
+  const articleImageSource = article?.socialImage || article?.featuredImage;
+  const articleImage = articleImageSource
+    ? urlFor(articleImageSource, { width: 1200, quality: 85 })
+    : 'https://northpolesolicitors.com/social-preview.svg';
 
   useDocumentMeta(
     `${articleTitle} | NorthPole Solicitors`,
@@ -68,6 +71,11 @@ export default function InsightsArticle({ params }: InsightsArticleProps) {
       type: 'article',
       url: articleUrl,
       image: articleImage || undefined,
+      publishedTime: article?.datePublished,
+      modifiedTime: article?._updatedAt,
+      author: article?.author,
+      section: article?.category,
+      preserveExistingSocial: true,
     },
   );
 

@@ -42,6 +42,7 @@ export interface InsightArticle {
   title: string;
   slug?: string;
   featuredImage?: SanityImageSource;
+  socialImage?: SanityImageSource;
   summary?: string;
   body?: Array<Record<string, unknown>>;
   author?: string;
@@ -50,6 +51,7 @@ export interface InsightArticle {
   datePublished?: string;
   seoTitle?: string;
   seoDescription?: string;
+  _updatedAt?: string;
   featuredArticle?: boolean;
 }
 
@@ -86,6 +88,7 @@ const insightProjection = `{
   title,
   "slug": slug.current,
   featuredImage,
+  socialImage,
   summary,
   body,
   author,

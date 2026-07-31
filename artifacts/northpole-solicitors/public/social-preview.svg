@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0b2035"/>
+  <rect x="72" y="72" width="1056" height="486" fill="none" stroke="#c79a3b" stroke-width="2"/>
+  <path d="M120 180h240M840 450h240" stroke="#c79a3b" stroke-width="4"/>
+  <text x="600" y="255" fill="#ffffff" font-family="Georgia, serif" font-size="72" letter-spacing="12" text-anchor="middle">NORTHPOLE</text>
+  <text x="600" y="330" fill="#c79a3b" font-family="Georgia, serif" font-size="30" letter-spacing="10" text-anchor="middle">SOLICITORS</text>
+  <text x="600" y="420" fill="#ffffff" font-family="Arial, sans-serif" font-size="28" text-anchor="middle">Practical legal solutions. Trusted representation.</text>
+</svg>

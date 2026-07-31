@@ -6,6 +6,11 @@ interface DocumentMetaOptions {
   type?: 'website' | 'article';
   url?: string;
   image?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  section?: string;
+  preserveExistingSocial?: boolean;
 }
 
 const siteName = 'NorthPole Solicitors';
@@ -56,12 +61,20 @@ export function useDocumentMeta(title: string, description: string, options: Doc
     setMetaAttribute('property', 'og:description', description);
     setMetaAttribute('property', 'og:site_name', siteName);
     setMetaAttribute('property', 'og:type', type);
-    setMetaAttribute('property', 'og:url', options.url);
-    setMetaAttribute('property', 'og:image', options.image);
+    if (!options.preserveExistingSocial || options.url) {
+      setMetaAttribute('property', 'og:url', options.url);
+      setCanonicalUrl(options.url);
+    }
+    if (!options.preserveExistingSocial || options.image) {
+      setMetaAttribute('property', 'og:image', options.image);
+      setMetaAttribute('name', 'twitter:image', options.image);
+    }
     setMetaAttribute('name', 'twitter:card', 'summary_large_image');
     setMetaAttribute('name', 'twitter:title', socialTitle);
     setMetaAttribute('name', 'twitter:description', description);
-    setMetaAttribute('name', 'twitter:image', options.image);
-    setCanonicalUrl(options.url);
-  }, [title, description, options.titleIsComplete, options.socialTitle, options.type, options.url, options.image]);
+    setMetaAttribute('property', 'article:published_time', options.publishedTime);
+    setMetaAttribute('property', 'article:modified_time', options.modifiedTime);
+    setMetaAttribute('property', 'article:author', options.author);
+    setMetaAttribute('property', 'article:section', options.section);
+  }, [title, description, options.titleIsComplete, options.socialTitle, options.type, options.url, options.image, options.publishedTime, options.modifiedTime, options.author, options.section, options.preserveExistingSocial]);
 }
