@@ -11,7 +11,7 @@ import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 
 export default function PrivacyNotice() {
   useDocumentMeta("Privacy Notice", "Information on how NorthPole Solicitors collects, uses, and protects your personal data.", {
-    url: 'https://www.northpolesolicitors.com/privacy',
+    url: 'https://www.northpolesolicitors.com/privacy-notice',
   });
 
   return (

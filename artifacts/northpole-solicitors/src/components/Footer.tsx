@@ -83,8 +83,8 @@ export function Footer() {
       <div className="max-w-7xl mx-auto border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/50">
         <p>© {new Date().getFullYear()} NorthPole Solicitors. All rights reserved.</p>
         <div className="flex gap-6">
-          <Link href="/privacy" className="hover:text-secondary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">Privacy Notice</Link>
-          <Link href="/disclaimer" className="hover:text-secondary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">Legal Disclaimer</Link>
+          <Link href="/privacy-notice" className="hover:text-secondary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">Privacy Notice</Link>
+          <Link href="/legal-disclaimer" className="hover:text-secondary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">Legal Disclaimer</Link>
         </div>
       </div>
     </footer>

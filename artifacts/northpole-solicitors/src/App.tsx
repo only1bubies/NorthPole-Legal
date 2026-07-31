@@ -40,8 +40,8 @@ function Router() {
       <Route path="/insights" component={Insights} />
       <Route path="/insights/:slug" component={InsightsArticle} />
       <Route path="/contact" component={Contact} />
-      <Route path="/privacy" component={PrivacyNotice} />
-      <Route path="/disclaimer" component={LegalDisclaimer} />
+      <Route path="/privacy-notice" component={PrivacyNotice} />
+      <Route path="/legal-disclaimer" component={LegalDisclaimer} />
       <Route component={NotFound} />
     </Switch>
   );

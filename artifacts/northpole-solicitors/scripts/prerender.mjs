@@ -46,12 +46,12 @@ const fixedRoutes = {
     description: 'Get in touch with NorthPole Solicitors to discuss your legal requirements.',
     type: 'website',
   },
-  '/privacy': {
+  '/privacy-notice': {
     title: 'Privacy Notice | NorthPole Solicitors',
     description: 'Information on how NorthPole Solicitors collects, uses, and protects your personal data.',
     type: 'website',
   },
-  '/disclaimer': {
+  '/legal-disclaimer': {
     title: 'Legal Disclaimer | NorthPole Solicitors',
     description: 'Terms of use and legal disclaimer for the NorthPole Solicitors website.',
     type: 'website',
@@ -267,8 +267,8 @@ await rm(join(distRoot, 'practice-areas'), { recursive: true, force: true });
 await rm(join(distRoot, 'our-team'), { recursive: true, force: true });
 await rm(join(distRoot, 'insights'), { recursive: true, force: true });
 await rm(join(distRoot, 'contact'), { recursive: true, force: true });
-await rm(join(distRoot, 'privacy'), { recursive: true, force: true });
-await rm(join(distRoot, 'disclaimer'), { recursive: true, force: true });
+await rm(join(distRoot, 'privacy-notice'), { recursive: true, force: true });
+await rm(join(distRoot, 'legal-disclaimer'), { recursive: true, force: true });
 
 for (const [route, metadata] of Object.entries(fixedRoutes)) {
   await writeRoute(shell, route, {

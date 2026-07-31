@@ -11,7 +11,7 @@ import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 
 export default function LegalDisclaimer() {
   useDocumentMeta("Legal Disclaimer", "Terms of use and legal disclaimer for the NorthPole Solicitors website.", {
-    url: 'https://www.northpolesolicitors.com/disclaimer',
+    url: 'https://www.northpolesolicitors.com/legal-disclaimer',
   });
 
   return (
