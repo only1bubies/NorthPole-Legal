@@ -9,7 +9,9 @@ const siteName = 'NorthPole Solicitors';
 const defaultTitle = 'NorthPole Solicitors | Full-Service Law Firm in Nigeria';
 const defaultDescription =
   'NorthPole Solicitors is a full-service law firm in Nigeria providing practical legal solutions in Corporate & Commercial Law, Intellectual Property, Real Estate, Dispute Resolution and more.';
-const defaultSocialImage = 'https://www.northpolesolicitors.com/images/social-preview.png';
+const defaultSocialImage = 'https://www.northpolesolicitors.com/images/social-preview.png?v=2';
+const defaultSocialImageWidth = '1734';
+const defaultSocialImageHeight = '907';
 
 const fixedRoutes = {
   '/': {
@@ -115,10 +117,16 @@ function buildHeadMetadata(metadata) {
     metaTag('property', 'og:type', metadata.type),
     metaTag('property', 'og:url', metadata.url),
     metaTag('property', 'og:image', metadata.image),
+    metaTag('property', 'og:image:secure_url', metadata.isArticle ? undefined : metadata.image),
+    metaTag('property', 'og:image:type', metadata.isArticle ? undefined : 'image/png'),
+    metaTag('property', 'og:image:width', metadata.isArticle ? undefined : defaultSocialImageWidth),
+    metaTag('property', 'og:image:height', metadata.isArticle ? undefined : defaultSocialImageHeight),
+    metaTag('property', 'og:image:alt', metadata.isArticle ? undefined : siteName),
     metaTag('name', 'twitter:card', 'summary_large_image'),
     metaTag('name', 'twitter:title', metadata.socialTitle || metadata.title),
     metaTag('name', 'twitter:description', metadata.description),
     metaTag('name', 'twitter:image', metadata.image),
+    metaTag('name', 'twitter:image:alt', metadata.isArticle ? undefined : siteName),
     metaTag('property', 'article:published_time', metadata.publishedTime),
     metaTag('property', 'article:modified_time', metadata.modifiedTime),
     metaTag('property', 'article:author', metadata.author),
@@ -201,6 +209,7 @@ for (const [route, metadata] of Object.entries(fixedRoutes)) {
     ...metadata,
     url: `${siteUrl}${route === '/' ? '/' : route}`,
     image: defaultSocialImage,
+    isArticle: false,
   });
 }
 
@@ -220,6 +229,7 @@ for (const article of insights) {
     type: 'article',
     url: articleUrl,
     image: image || defaultSocialImage,
+    isArticle: true,
     publishedTime: article.datePublished,
     modifiedTime: article._updatedAt,
     author: article.author,
