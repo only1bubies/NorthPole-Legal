@@ -13,6 +13,9 @@ const defaultDescription =
 const defaultSocialImage = 'https://www.northpolesolicitors.com/images/social-preview.png?v=2';
 const defaultSocialImageWidth = '1734';
 const defaultSocialImageHeight = '907';
+const indexNowEndpoint = 'https://api.indexnow.org/indexnow';
+const indexNowKey = '31bfb4cf6ab844d7890b4ebf23b29d42';
+const indexNowKeyLocation = `${siteUrl}/${indexNowKey}.txt`;
 
 const fixedRoutes = {
   '/': {
@@ -232,6 +235,7 @@ async function writeSitemap(insights) {
       lastmod: getSitemapLastmod(article),
     }));
   const entries = [...staticEntries, ...articleEntries];
+  const sitemapUrls = entries.map((entry) => `${sitemapSiteUrl}${entry.path}`);
   const urls = entries
     .map((entry) => [
       '  <url>',
@@ -252,7 +256,36 @@ async function writeSitemap(insights) {
 
   await writeFile(join(distRoot, 'sitemap.xml'), sitemap);
   console.log(`Generated sitemap.xml with ${entries.length} URLs.`);
-  return entries.length;
+  return sitemapUrls;
+}
+
+async function submitToIndexNow(urls) {
+  if (process.env.VERCEL_ENV !== 'production') {
+    console.log(`Skipped IndexNow submission outside production (${urls.length} URLs).`);
+    return;
+  }
+
+  try {
+    const response = await fetch(indexNowEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      body: JSON.stringify({
+        host: new URL(siteUrl).host,
+        key: indexNowKey,
+        keyLocation: indexNowKeyLocation,
+        urlList: urls,
+      }),
+    });
+
+    console.log(`IndexNow submitted ${urls.length} URLs; HTTP status ${response.status}.`);
+    if (response.ok) {
+      console.log('IndexNow submission succeeded.');
+    } else {
+      console.error(`IndexNow submission failed: ${await response.text()}`);
+    }
+  } catch (error) {
+    console.error(`IndexNow submission failed: ${error.message}`);
+  }
 }
 
 const shell = await readFile(join(distRoot, 'index.html'), 'utf8');
@@ -303,5 +336,6 @@ for (const article of insights) {
   });
 }
 
-await writeSitemap(insights);
+const sitemapUrls = await writeSitemap(insights);
+await submitToIndexNow(sitemapUrls);
 console.log(`Prerendered ${Object.keys(fixedRoutes).length} fixed routes and ${insights.length} Insight routes.`);
