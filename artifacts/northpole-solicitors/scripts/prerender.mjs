@@ -9,7 +9,7 @@ const siteName = 'NorthPole Solicitors';
 const defaultTitle = 'NorthPole Solicitors | Full-Service Law Firm in Nigeria';
 const defaultDescription =
   'NorthPole Solicitors is a full-service law firm in Nigeria providing practical legal solutions in Corporate & Commercial Law, Intellectual Property, Real Estate, Dispute Resolution and more.';
-const defaultSocialImage = `${siteUrl}/social-preview.svg`;
+const defaultSocialImage = 'https://www.northpolesolicitors.com/images/social-preview.png';
 
 const fixedRoutes = {
   '/': {
@@ -200,6 +200,7 @@ for (const [route, metadata] of Object.entries(fixedRoutes)) {
   await writeRoute(shell, route, {
     ...metadata,
     url: `${siteUrl}${route === '/' ? '/' : route}`,
+    image: defaultSocialImage,
   });
 }
 

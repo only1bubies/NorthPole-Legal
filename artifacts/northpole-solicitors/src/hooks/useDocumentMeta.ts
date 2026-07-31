@@ -14,6 +14,7 @@ interface DocumentMetaOptions {
 }
 
 const siteName = 'NorthPole Solicitors';
+const defaultSocialImage = 'https://www.northpolesolicitors.com/images/social-preview.png';
 
 function setMetaAttribute(attribute: 'name' | 'property', key: string, content?: string) {
   let meta = document.querySelector<HTMLMetaElement>(`meta[${attribute}="${key}"]`);
@@ -54,6 +55,7 @@ export function useDocumentMeta(title: string, description: string, options: Doc
     const documentTitle = options.titleIsComplete ? title : `${title} | ${siteName}`;
     const socialTitle = options.socialTitle || documentTitle;
     const type = options.type || 'website';
+    const socialImage = options.image || defaultSocialImage;
 
     document.title = documentTitle;
     setMetaAttribute('name', 'description', description);
@@ -66,8 +68,8 @@ export function useDocumentMeta(title: string, description: string, options: Doc
       setCanonicalUrl(options.url);
     }
     if (!options.preserveExistingSocial || options.image) {
-      setMetaAttribute('property', 'og:image', options.image);
-      setMetaAttribute('name', 'twitter:image', options.image);
+      setMetaAttribute('property', 'og:image', socialImage);
+      setMetaAttribute('name', 'twitter:image', socialImage);
     }
     setMetaAttribute('name', 'twitter:card', 'summary_large_image');
     setMetaAttribute('name', 'twitter:title', socialTitle);
