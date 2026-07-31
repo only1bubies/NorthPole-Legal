@@ -30,7 +30,7 @@ const fixedRoutes = {
     description: 'Explore the comprehensive legal services offered by NorthPole Solicitors.',
     type: 'website',
   },
-  '/team': {
+  '/our-team': {
     title: 'Our Team | NorthPole Solicitors',
     description: 'Meet the experienced legal professionals at NorthPole Solicitors.',
     type: 'website',
@@ -217,7 +217,7 @@ async function writeSitemap(insights) {
     { path: '/', changefreq: 'weekly', priority: '1.0', lastmod: buildLastmod },
     { path: '/about', changefreq: 'monthly', priority: '0.8', lastmod: buildLastmod },
     { path: '/practice-areas', changefreq: 'monthly', priority: '0.8', lastmod: buildLastmod },
-    { path: '/team', changefreq: 'monthly', priority: '0.7', lastmod: buildLastmod },
+    { path: '/our-team', changefreq: 'monthly', priority: '0.7', lastmod: buildLastmod },
     { path: '/insights', changefreq: 'weekly', priority: '0.9', lastmod: buildLastmod },
     { path: '/contact', changefreq: 'monthly', priority: '0.8', lastmod: buildLastmod },
     { path: '/privacy-notice', changefreq: 'yearly', priority: '0.3', lastmod: buildLastmod },
@@ -264,7 +264,7 @@ if (!config.projectId || !config.dataset) {
 
 await rm(join(distRoot, 'about'), { recursive: true, force: true });
 await rm(join(distRoot, 'practice-areas'), { recursive: true, force: true });
-await rm(join(distRoot, 'team'), { recursive: true, force: true });
+await rm(join(distRoot, 'our-team'), { recursive: true, force: true });
 await rm(join(distRoot, 'insights'), { recursive: true, force: true });
 await rm(join(distRoot, 'contact'), { recursive: true, force: true });
 await rm(join(distRoot, 'privacy'), { recursive: true, force: true });

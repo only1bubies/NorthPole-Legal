@@ -221,7 +221,7 @@ export default function Home() {
             </ScrollReveal>
             <ScrollReveal delay={0.2}>
               <Link 
-                href="/team"
+                href="/our-team"
                 className="inline-flex items-center text-primary border-b border-primary pb-1 font-semibold uppercase tracking-[0.1em] hover:text-secondary hover:border-secondary transition-colors"
               >
                 View Full Team <ArrowRight className="w-4 h-4 ml-2" />
