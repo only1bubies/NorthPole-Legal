@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const distRoot = join(packageRoot, 'dist');
 const siteUrl = 'https://northpolesolicitors.com';
+const sitemapSiteUrl = 'https://www.northpolesolicitors.com';
 const siteName = 'NorthPole Solicitors';
 const defaultTitle = 'NorthPole Solicitors | Full-Service Law Firm in Nigeria';
 const defaultDescription =
@@ -84,6 +85,15 @@ function escapeHtml(value = '') {
     .replaceAll('"', '&quot;')
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;');
+}
+
+function escapeXml(value = '') {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&apos;');
 }
 
 function appendTitle(title) {
@@ -189,6 +199,60 @@ async function writeRoute(shell, route, metadata) {
   await writeFile(join(outputDirectory, 'index.html'), replaceHeadMetadata(shell, metadata));
 }
 
+function getSitemapLastmod(article) {
+  const value = article._updatedAt || article.datePublished;
+
+  if (!value) {
+    return undefined;
+  }
+
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? undefined : date.toISOString();
+}
+
+async function writeSitemap(insights) {
+  const staticEntries = [
+    { path: '/', changefreq: 'weekly', priority: '1.0' },
+    { path: '/about', changefreq: 'monthly', priority: '0.8' },
+    { path: '/practice-areas', changefreq: 'monthly', priority: '0.8' },
+    { path: '/team', changefreq: 'monthly', priority: '0.7' },
+    { path: '/insights', changefreq: 'weekly', priority: '0.9' },
+    { path: '/contact', changefreq: 'monthly', priority: '0.8' },
+    { path: '/privacy-notice', changefreq: 'yearly', priority: '0.3' },
+    { path: '/legal-disclaimer', changefreq: 'yearly', priority: '0.3' },
+  ];
+  const articleEntries = insights
+    .filter((article) => article.slug)
+    .map((article) => ({
+      path: `/insights/${article.slug}`,
+      changefreq: 'monthly',
+      priority: '0.7',
+      lastmod: getSitemapLastmod(article),
+    }));
+  const entries = [...staticEntries, ...articleEntries];
+  const urls = entries
+    .map((entry) => [
+      '  <url>',
+      `    <loc>${escapeXml(`${sitemapSiteUrl}${entry.path}`)}</loc>`,
+      entry.lastmod ? `    <lastmod>${escapeXml(entry.lastmod)}</lastmod>` : '',
+      `    <changefreq>${entry.changefreq}</changefreq>`,
+      `    <priority>${entry.priority}</priority>`,
+      '  </url>',
+    ].filter(Boolean).join('\n'))
+    .join('\n');
+  const sitemap = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    urls,
+    '</urlset>',
+    '',
+  ].join('\n');
+
+  await writeFile(join(distRoot, 'sitemap.xml'), sitemap);
+  console.log(`Generated sitemap.xml with ${entries.length} URLs.`);
+  return entries.length;
+}
+
 const shell = await readFile(join(distRoot, 'index.html'), 'utf8');
 const config = await loadPublicEnv();
 
@@ -237,4 +301,5 @@ for (const article of insights) {
   });
 }
 
+await writeSitemap(insights);
 console.log(`Prerendered ${Object.keys(fixedRoutes).length} fixed routes and ${insights.length} Insight routes.`);
