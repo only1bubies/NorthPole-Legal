@@ -5,6 +5,19 @@ import { defineConfig, loadEnv } from 'vite';
 
 import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
 
+const sitemapContentTypePlugin = {
+  name: 'sitemap-content-type',
+  configurePreviewServer(server: { middlewares: { use: (handler: (request: { url?: string }, response: { setHeader: (name: string, value: string) => void }, next: () => void) => void) => void } }) {
+    server.middlewares.use((request, response, next) => {
+      if (request.url?.split('?')[0] === '/sitemap.xml') {
+        response.setHeader('Content-Type', 'application/xml');
+      }
+
+      next();
+    });
+  },
+};
+
 export default defineConfig(async ({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
 
@@ -25,6 +38,7 @@ export default defineConfig(async ({ mode }) => {
     plugins: [
       react(),
       tailwindcss(),
+      sitemapContentTypePlugin,
       runtimeErrorOverlay(),
       ...(env.NODE_ENV !== 'production' && process.env.REPL_ID !== undefined
         ? [

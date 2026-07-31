@@ -2,6 +2,13 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "routes": [
     {
+      "src": "/sitemap\\.xml",
+      "headers": {
+        "Content-Type": "application/xml"
+      },
+      "continue": true
+    },
+    {
       "handle": "filesystem"
     },
     {
