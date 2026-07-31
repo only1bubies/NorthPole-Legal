@@ -56,7 +56,7 @@ export default function InsightsArticle({ params }: InsightsArticleProps) {
   const [isLoading, setIsLoading] = useState(true);
   const articleTitle = article?.seoTitle || article?.title || 'Insight';
   const articleDescription = article?.seoDescription || article?.summary || 'Legal commentary and thought leadership from NorthPole Solicitors.';
-  const articleUrl = slug ? `https://northpolesolicitors.com/insights/${slug}` : undefined;
+  const articleUrl = slug ? `https://www.northpolesolicitors.com/insights/${slug}` : undefined;
   const articleImageSource = article?.socialImage || article?.featuredImage;
   const articleImage = articleImageSource
     ? urlFor(articleImageSource, { width: 1200, quality: 85 })

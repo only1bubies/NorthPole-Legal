@@ -19,7 +19,7 @@ export default function Home() {
     "NorthPole Solicitors is a full-service law firm in Nigeria providing practical legal solutions in Corporate & Commercial Law, Intellectual Property, Real Estate, Dispute Resolution and more.",
     {
       titleIsComplete: true,
-      url: 'https://northpolesolicitors.com/',
+      url: 'https://www.northpolesolicitors.com/',
     },
   );
 

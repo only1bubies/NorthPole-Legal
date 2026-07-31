@@ -26,7 +26,9 @@ function formatDate(value?: string) {
 }
 
 export default function Insights() {
-  useDocumentMeta("Insights", "Legal commentary, regulatory updates, and thought leadership from NorthPole Solicitors.");
+  useDocumentMeta("Insights", "Legal commentary, regulatory updates, and thought leadership from NorthPole Solicitors.", {
+    url: 'https://www.northpolesolicitors.com/insights',
+  });
 
   const [articles, setArticles] = useState<InsightArticle[]>([]);
   const [isLoading, setIsLoading] = useState(true);

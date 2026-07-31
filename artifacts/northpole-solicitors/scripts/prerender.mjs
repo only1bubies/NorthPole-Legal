@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const distRoot = join(packageRoot, 'dist');
-const siteUrl = 'https://northpolesolicitors.com';
+const siteUrl = 'https://www.northpolesolicitors.com';
 const sitemapSiteUrl = 'https://www.northpolesolicitors.com';
 const siteName = 'NorthPole Solicitors';
 const defaultTitle = 'NorthPole Solicitors | Full-Service Law Firm in Nigeria';
@@ -34,6 +34,7 @@ const fixedRoutes = {
     title: 'Our Team | NorthPole Solicitors',
     description: 'Meet the experienced legal professionals at NorthPole Solicitors.',
     type: 'website',
+    canonicalUrl: 'https://www.northpolesolicitors.com/our-team',
   },
   '/insights': {
     title: 'Insights | NorthPole Solicitors',
@@ -272,7 +273,7 @@ await rm(join(distRoot, 'disclaimer'), { recursive: true, force: true });
 for (const [route, metadata] of Object.entries(fixedRoutes)) {
   await writeRoute(shell, route, {
     ...metadata,
-    url: `${siteUrl}${route === '/' ? '/' : route}`,
+    url: metadata.canonicalUrl || `${siteUrl}${route === '/' ? '/' : route}`,
     image: defaultSocialImage,
     isArticle: false,
   });

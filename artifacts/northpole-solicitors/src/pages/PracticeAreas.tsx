@@ -11,7 +11,9 @@ import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 import { practiceAreas } from '@/data/practiceAreas';
 
 export default function PracticeAreas() {
-  useDocumentMeta("Practice Areas", "Explore the comprehensive legal services offered by NorthPole Solicitors.");
+  useDocumentMeta("Practice Areas", "Explore the comprehensive legal services offered by NorthPole Solicitors.", {
+    url: 'https://www.northpolesolicitors.com/practice-areas',
+  });
 
   return (
     <div className="min-h-screen bg-background">

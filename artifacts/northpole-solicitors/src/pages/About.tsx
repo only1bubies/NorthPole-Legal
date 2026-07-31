@@ -11,7 +11,9 @@ import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 import { ShieldCheck, Star, Users } from 'lucide-react';
 
 export default function About() {
-  useDocumentMeta("About Us", "Learn about NorthPole Solicitors' founding story, mission, and values.");
+  useDocumentMeta("About Us", "Learn about NorthPole Solicitors' founding story, mission, and values.", {
+    url: 'https://www.northpolesolicitors.com/about',
+  });
 
   return (
     <div className="min-h-screen bg-background">

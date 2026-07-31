@@ -12,7 +12,9 @@ import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 import { Linkedin, Twitter, Instagram, MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 export default function Contact() {
-  useDocumentMeta("Contact Us", "Get in touch with NorthPole Solicitors to discuss your legal requirements.");
+  useDocumentMeta("Contact Us", "Get in touch with NorthPole Solicitors to discuss your legal requirements.", {
+    url: 'https://www.northpolesolicitors.com/contact',
+  });
 
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [acknowledgementSent, setAcknowledgementSent] = useState(false);

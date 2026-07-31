@@ -10,7 +10,9 @@ import { ScrollReveal } from '@/components/ScrollReveal';
 import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 
 export default function LegalDisclaimer() {
-  useDocumentMeta("Legal Disclaimer", "Terms of use and legal disclaimer for the NorthPole Solicitors website.");
+  useDocumentMeta("Legal Disclaimer", "Terms of use and legal disclaimer for the NorthPole Solicitors website.", {
+    url: 'https://www.northpolesolicitors.com/disclaimer',
+  });
 
   return (
     <div className="min-h-screen bg-background">

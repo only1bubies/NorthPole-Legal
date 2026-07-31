@@ -12,7 +12,9 @@ import { Linkedin, ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
 
 export default function Team() {
-  useDocumentMeta("Our Team", "Meet the experienced legal professionals at NorthPole Solicitors.");
+  useDocumentMeta("Our Team", "Meet the experienced legal professionals at NorthPole Solicitors.", {
+    url: 'https://www.northpolesolicitors.com/our-team',
+  });
 
   const teamMembers = [
     {
