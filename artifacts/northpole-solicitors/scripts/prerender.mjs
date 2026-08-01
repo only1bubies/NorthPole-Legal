@@ -123,6 +123,7 @@ function metaTag(attribute, key, value) {
 function buildHeadMetadata(metadata) {
   const tags = [
     `    <meta name="robots" content="index, follow" />`,
+    `    <meta name="theme-color" content="#0D1B2A" />`,
     `    <title>${escapeHtml(metadata.title)}</title>`,
     metaTag('name', 'description', metadata.description),
     metaTag('property', 'og:title', metadata.socialTitle || metadata.title),
